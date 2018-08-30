@@ -56,3 +56,7 @@ app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 4.2. response
 
 - data type : 어떤 형식으로 답할까?
+
+> sorted vs sort
+> a.sort() : return이 없다 (list를 정렬하고 끝남) - 원본 바뀜
+> sorted(a) : 정렬된 list를 return - 원본 안바뀜
