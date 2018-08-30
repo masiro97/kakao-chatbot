@@ -39,3 +39,20 @@ def keyboard():
 app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 
 ```
+> RESTful?? (CRUD)
+> GET - READ
+> POST - CREATE
+> UPDATE - UPDATE
+> DELETE - DELETE
+
+### 4. API
+
+4.1. requset
+
+- url : 어떤 경로로 보낼꺼니?
+- method : 어떤 방법으로 보낼꺼니?
+- parameter : 어떤 정보를 담을거니?
+    
+4.2. response
+
+- data type : 어떤 형식으로 답할까?
