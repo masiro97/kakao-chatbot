@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import os
 import json
 import random
+import requests
 
 app = Flask(__name__)
 
@@ -24,8 +25,8 @@ def message():
     
     # content라는 key의 value를 msg에 저장
     msg = request.json['content']
-    
-    
+    img_bool = False
+    img_url = "https://24.media.tumblr.com/tumblr_lg902plO3R1qfyzelo1_500.jpg"
     
     if msg == "메뉴":
         menu = ["20층", "mulcam", "menu1", "menu2"]
@@ -45,22 +46,46 @@ def message():
         # 정렬 후 string으로 변환하여 저장
         return_msg = str(sorted(pick))
         
+    elif msg == "고양이":
+        img_bool = True
+        url = "https://api.thecatapi.com/v1/images/search?mime_types=jpg"
+        res = requests.get(url).json()
+        return_msg = "나만 고양이 없어:("
+        img_url = res[0]['url']
+        
     else:
         return_msg = "현재 메뉴만 지원합니다."
-        
-    message = {
-        "text" : return_msg
+    
+    message1 = {
+        "text" : return_msg,
+        "photo": {
+            "url": img_url,
+            "width": 640,
+            "height": 480
+        }
     }
+    
+    message2 = {
+        "text" : return_msg,
+    }
+    
     
     keyboard = {
         "type" : "buttons",
         "buttons" : ["메뉴", "로또", "고양이", "영화"]
     }
-
-    res = {
-        "message": message,
-        "keyboard": keyboard
-    }
+    
+    if(img_bool):
+        res = {
+            "message": message1,
+            "keyboard": keyboard
+        }
+        
+    else:
+        res = {
+            "message": message2,
+            "keyboard": keyboard
+        }
     
     return jsonify(res)
     

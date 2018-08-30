@@ -39,11 +39,11 @@ def keyboard():
 app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 
 ```
-> RESTful?? (CRUD)
-> GET - READ
-> POST - CREATE
-> UPDATE - UPDATE
-> DELETE - DELETE
+> RESTful?? (CRUD) <br>
+> GET - READ <br>
+> POST - CREATE <br>
+> UPDATE - UPDATE <br>
+> DELETE - DELETE <br>
 
 ### 4. API
 
@@ -57,6 +57,6 @@ app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 
 - data type : 어떤 형식으로 답할까?
 
-> sorted vs sort
-> a.sort() : return이 없다 (list를 정렬하고 끝남) - 원본 바뀜
-> sorted(a) : 정렬된 list를 return - 원본 안바뀜
+> sorted vs sort <br>
+> a.sort() : return이 없다 (list를 정렬하고 끝남) - 원본 바뀜 <br>
+> sorted(a) : 정렬된 list를 return - 원본 안바뀜 <br>
