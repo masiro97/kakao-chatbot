@@ -16,7 +16,7 @@ def hello():
 def keyboard():
     keyboard = {
         "type" : "buttons",
-        "buttons" : ["메뉴", "로또", "고양이", "영화"]
+        "buttons" : ["위키" ,"메뉴", "로또", "고양이", "영화", "트위터"]
     }
     
     json_keyboard = json.dumps(keyboard)
@@ -80,6 +80,34 @@ def message():
         return_msg = "{} || 별점 : {} 예매율 : {}".format(pick_movie["title"],pick_movie["star"],pick_movie['reserve'])
         img_bool = True
         img_url = pick_movie["img_url"]
+    
+    elif msg == "트위터":
+        url = "https://twitter.com/MBC_entertain"
+        res = requests.get(url).text
+        doc = BeautifulSoup(res, "html.parser")
+        
+        img_list = []
+        
+        pick = doc.select('div.tweet.js-stream-tweet.js-actionable-tweet.js-profile-popup-actionable.dismissible-content.original-tweet.js-original-tweet.has-cards.has-content')
+        
+        for pickNum in pick:
+            img_tag = pickNum.select('img')
+            for imgNum in img_tag:
+                img_list.append(imgNum['src'])
+                # print(imgNum['src'])
+                
+        return_msg = ""
+        img_bool = True
+        img_url = img_list[random.randrange(0,len(img_list))]
+        
+        while(True):
+            if "emoji" in img_url or "profile_images" in img_url:
+                img_url = img_list[random.randrange(0,len(img_list))]
+            else:
+                break
+            
+    elif msg == "위키":
+        return_msg = "https://namu.wiki/w/나무위키:대문"
     else:
         return_msg = "현재 메뉴만 지원합니다."
     
@@ -87,8 +115,8 @@ def message():
         "text" : return_msg,
         "photo": {
             "url": img_url,
-            "width": 640,
-            "height": 480
+            "width": 1280,
+            "height": 960
         }
     }
     
@@ -99,7 +127,7 @@ def message():
     
     keyboard = {
         "type" : "buttons",
-        "buttons" : ["메뉴", "로또", "고양이", "영화"]
+        "buttons" : ["위키" ,"메뉴", "로또", "고양이", "영화", "트위터"]
     }
     
     if(img_bool):
